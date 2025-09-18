@@ -1,12 +1,12 @@
 const scale = 50;
-
-function initialization(R) {
-    const canvas = document.getElementById("canvas_graph")
-    const ctx = canvas.getContext("2d")
     const W = canvas.width;
     const H = canvas.height;
     const centerX = W / 2;
     const centerY = H / 2;
+
+function initialization(R) {
+    const canvas = document.getElementById("canvas_graph")
+    const ctx = canvas.getContext("2d")
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -94,5 +94,21 @@ function initialization(R) {
 function convertIntoCanvasCoordinates(x, y) {
     return [centerX + x * scale, centerY - y * scale]
 }
+
+function drawPoint(x, y, hit) {
+    const canvas = document.getElementById("canvas_graph");
+    const ctx = canvas.getContext("2d");
+    if (hit) {
+        ctx.fillStyle = '#000000ff'
+    } else {
+        ctx.fillStyle = '#D14545'
+    }
+    ctx.beginPath()
+    let [newX, newY] = convertIntoCanvasCoordinates(x, y)
+    ctx.arc(newX, newY, 3, 0, 2*Math.PI)
+    ctx.closePath()
+    ctx.fill()
+}
+export {initialization, drawPoint};
 
 initialization(2);
