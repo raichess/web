@@ -1,8 +1,12 @@
+import {initialization, drawPoint} from "./canvas.js";
 const xCheckboxes = document.querySelectorAll('.checkbox_X')
 const submitButton = document.getElementById("submit")
 const clearButton = document.getElementById("clear")
 const yInput = document.getElementById('y');
 const error = document.getElementById('error')
+const rInput = document.querySelectorAll('#choice_r input[type="radio"]');
+let currentR = 2; 
+
 
 const validateX = function() {
     const selectedX = document.querySelector('input[type="checkbox"]:checked')
@@ -42,4 +46,38 @@ const validateR = function() {
         return true
     }
 }
+
+function changeR(event) {
+    const selectedR = event.target
+    currentR = parseFloat(selectedR.value)
+    redraw(currentR)
+}
+rInput.forEach(radio => {
+    radio.addEventListener('change', changeR)
+})
+
+function redraw(R = 2) {
+    initialization(R);
+    const canvas = document.getElementById("canvas_graph");
+    const ctx = canvas.getContext("2d");
+    let history = JSON.parse(localStorage.getItem('results') || '[]');
+    history.forEach(result => {
+        drawPoint(parseFloat(result.x), parseFloat(result.y), result.hit);
+    });
+}
+
+function clear() {
+    localStorage.removeItem('results')
+    const tbody = document.getElementById('body_table')
+    tbody.innerHTML = ''
+    mainForm.reset()
+    redraw(2)
+}
+clearButton.addEventListener('click', clear)
+
+//
+
+
+
+
 
