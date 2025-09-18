@@ -28,9 +28,9 @@
                 font-size: 24px;
             }
             #main {
-            display: flex;                   /* делаем контейнер flex */
-            justify-content: space-between;  /* форма слева, canvas справа */
-            align-items: flex-start;         /* выравниваем по верхнему краю */
+            display: flex;                   
+            justify-content: space-between;  
+            align-items: flex-start;         
             margin: 50px;
             }
             #form {
@@ -128,6 +128,7 @@
                     <button id="submit" type="button">Отправить</button>
                     <button id="clear" type="button">Очистить таблицу</button>
                 </div>
+                <div class="error" id="error"></div>
             </form>
             <div id="canvas_container">
                 <canvas id="canvas_graph" width="400" height="400"></canvas>
