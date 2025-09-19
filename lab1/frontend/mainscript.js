@@ -1,16 +1,29 @@
 import {initialization, drawPoint} from "./canvas.js";
-const xCheckboxes = document.querySelectorAll('.checkbox_X')
-const submitButton = document.getElementById("submit")
+const mainForm = document.getElementById('form')
 const clearButton = document.getElementById("clear")
-const yInput = document.getElementById('y');
+const yInput = document.getElementById('y')
+const xInput = document.getElementById('x')
 const error = document.getElementById('error')
-const rInput = document.querySelectorAll('#choice_r input[type="radio"]');
-let currentR = 2; 
+const rInput = document.querySelectorAll('#choice_r input[type="radio"]')
+let currentR = 2
+
+window.onload = function() {
+    redraw(currentR);
+};
+
+async function sendRequest(x, y , r) {
+    const errorField = document.getElementById('error')
+    const dataForRequest = {
+        x: x,
+        y: y,
+        r: r
+    }
+}
 
 
 const validateX = function() {
-    const selectedX = document.querySelector('input[type="checkbox"]:checked')
-    if (!selectedX) {
+    const selectedX = xInput.value
+    if (selectedX === '' || selectedX == null ) {
         showMessage(error, "Необходимо выбрать координату X!")
         return false
     } else {
@@ -20,15 +33,15 @@ const validateX = function() {
 }
 
 const validateY = function() {
-    const yValue = yInput.value.trim();
-    if (yValue == '') {
+    const selectedY = yInput.value.trim();
+    if (selectedY == '') {
         showMessage(error, "Необходимо выбрать координату Y!")
         return false
-    } else if (isNaN(yValue)) { 
-        showMessage(error, "Не входит в диапазон!")
-        return false
-    } else if (yValue < -5 || yValue > 5) {
+    } else if (isNaN(selectedY)) { 
         showMessage(error, "Y должен быть числом!")
+        return false
+    } else if (selectedY < -5 || selectedY > 5) {
+        showMessage(error, "Не входит в диапазон!") 
         return false
     } else {
         showMessage(error, "")
@@ -56,10 +69,8 @@ rInput.forEach(radio => {
     radio.addEventListener('change', changeR)
 })
 
-function redraw(R = 2) {
+function redraw(R = currentR) {
     initialization(R);
-    const canvas = document.getElementById("canvas_graph");
-    const ctx = canvas.getContext("2d");
     let history = JSON.parse(localStorage.getItem('results') || '[]');
     history.forEach(result => {
         drawPoint(parseFloat(result.x), parseFloat(result.y), result.hit);
@@ -71,11 +82,28 @@ function clear() {
     const tbody = document.getElementById('body_table')
     tbody.innerHTML = ''
     mainForm.reset()
-    redraw(2)
+    redraw(currentR)
 }
 clearButton.addEventListener('click', clear)
 
-//
+async function handleSubmit(event) {
+    event.preventDefault();
+    const x = xInput.value;
+    const y = yInput.value.trim();
+    const rSelected = document.querySelector('#choice_r input[type="radio"]:checked');
+
+    if (!validateX() || !validateY() || !validateR()) return;
+
+    const r = rSelected.value;
+    //await sendRequest(x, y, r);
+}
+
+mainForm.addEventListener('submit', handleSubmit);
+
+function addRow() {
+
+}
+
 
 
 

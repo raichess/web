@@ -1,12 +1,13 @@
-const scale = 50;
-    const W = canvas.width;
-    const H = canvas.height;
-    const centerX = W / 2;
-    const centerY = H / 2;
+const scale = 50
+let centerX, centerY
 
-function initialization(R) {
+function initialization(R=2) {
     const canvas = document.getElementById("canvas_graph")
     const ctx = canvas.getContext("2d")
+    const W = canvas.width;
+    const H = canvas.height;
+    centerX = W / 2;
+    centerY = H / 2;
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -31,12 +32,12 @@ function initialization(R) {
     ctx.lineTo(centerX + scale * R / 2, centerY);
     ctx.lineTo(centerX, centerY + scale * R);
     ctx.closePath();
-    ctx.fillStyle = "rgb(255, 153, 204, 0.5))";
+    ctx.fillStyle = "rgb(255, 153, 204, 0.5)";
     ctx.fill();
     
     ctx.beginPath();
     ctx.rect(centerX - scale * R/2, centerY, scale * R/2, scale * R);
-    ctx.fillStyle = "rgb(255, 153, 204, 0.5))";
+    ctx.fillStyle = "rgb(255, 153, 204, 0.5)";
     ctx.fill();
 
     ctx.fillStyle = "black";
@@ -110,5 +111,3 @@ function drawPoint(x, y, hit) {
     ctx.fill()
 }
 export {initialization, drawPoint};
-
-initialization(2);

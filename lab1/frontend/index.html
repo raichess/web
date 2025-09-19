@@ -12,6 +12,9 @@
                 background-size: 100% auto;
                 background-repeat: no-repeat;
                 min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh; 
             }
 
             header {
@@ -28,10 +31,10 @@
                 font-size: 24px;
             }
             #main {
-            display: flex;                   
-            justify-content: space-between;  
-            align-items: flex-start;         
-            margin: 50px;
+                display: flex;                   
+                justify-content: space-between;  
+                align-items: flex-start;         
+                margin: 50px;
             }
             #form {
                 text-align: left;
@@ -43,11 +46,15 @@
                 font-weight: bold;
                 font-size: 28px;
             }
-
             #form label {
                 color: rgb(200, 24, 118);
                 font-size: 20px; 
             }
+            #form select {
+                color: rgb(200, 24, 118);
+                font-size: 24px; 
+            }
+
             #button_container button {
                 width: 150px;
                 height: 40px;
@@ -63,6 +70,7 @@
             }
             #table_container {
                 margin: 20px 25px;
+                margin-top: auto; 
             }
             #result_table {
                 width: 100%;
@@ -102,19 +110,21 @@
             <form id="form">
                 <div id="choice_x">
                     <span class="label_name">Выберите X: </span>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="-2">-2</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="-1.5">-1.5</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="-1">-1</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="-0.5">-0.5</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="0">0</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="0.5">0.5</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="1">1</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="1.5">1.5</label>
-                    <label><input class="checkbox_X" type="checkbox" name="x" value="2">2</label>
+                    <select id="x">
+                        <option value="-2">-2</option>
+                        <option value="-1.5">-1.5</option>
+                        <option value="-1">-1</option>
+                        <option value="-0.5">-0.5</option>
+                        <option value="0">0</option>
+                        <option value="0.5">0.5</option>
+                        <option value="1">1</option>
+                        <option value="1.5">1.5</option>
+                        <option value="2">2</option>
+                    </select>
                 </div>
                 <div id="choice_y">
                     <span class="label_name">Введите Y: </span>
-                    <label><input type="number" id="y" placeholder="От -5 до 5" min="-5" max="5"></label>
+                    <label><input type="text" id="y" placeholder="От -5 до 5"></label>
                 </div>
                 <div id="choice_r">
                     <span class="label_name">Введите R: </span>
@@ -126,12 +136,12 @@
                 </div>
                 <div id="button_container">
                     <button id="submit" type="button">Отправить</button>
-                    <button id="clear" type="button">Очистить таблицу</button>
+                    <button id="clear" type="button">Очистить</button>
                 </div>
                 <div class="error" id="error"></div>
             </form>
             <div id="canvas_container">
-                <canvas id="canvas_graph" width="400" height="400"></canvas>
+                <canvas id="canvas_graph" width="500" height="500"></canvas>
             </div>  
         </div>
           
@@ -151,6 +161,6 @@
                 <tbody id="body_table"></tbody>
             </table>
         </div>
-         <script src="canvas.js"></script>
+         <script type="module" src="mainscript.js"></script>
     </body>
 </html>
