@@ -1,4 +1,5 @@
 import {initialization, drawPoint} from "./canvas.js";
+
 const mainForm = document.getElementById('form')
 const clearButton = document.getElementById("clear")
 const yInput = document.getElementById('y')
@@ -7,23 +8,18 @@ const error = document.getElementById('error')
 const rInput = document.querySelectorAll('#choice_r input[type="radio"]')
 let currentR = 2
 
-window.onload = function() {
+window.onload = function () {
     redraw(currentR);
 };
 
-async function sendRequest(x, y , r) {
-    const errorField = document.getElementById('error')
-    const dataForRequest = {
-        x: x,
-        y: y,
-        r: r
-    }
+async function sendRequest(x, y, r) {
+
 }
 
 
-const validateX = function() {
+const validateX = function () {
     const selectedX = xInput.value
-    if (selectedX === '' || selectedX == null ) {
+    if (selectedX === '' || selectedX == null) {
         showMessage(error, "Необходимо выбрать координату X!")
         return false
     } else {
@@ -32,16 +28,16 @@ const validateX = function() {
     }
 }
 
-const validateY = function() {
+const validateY = function () {
     const selectedY = yInput.value.trim();
-    if (selectedY == '') {
+    if (selectedY === '') {
         showMessage(error, "Необходимо выбрать координату Y!")
         return false
-    } else if (isNaN(selectedY)) { 
+    } else if (isNaN(selectedY)) {
         showMessage(error, "Y должен быть числом!")
         return false
     } else if (selectedY < -5 || selectedY > 5) {
-        showMessage(error, "Не входит в диапазон!") 
+        showMessage(error, "Не входит в диапазон!")
         return false
     } else {
         showMessage(error, "")
@@ -49,7 +45,7 @@ const validateY = function() {
     }
 }
 
-const validateR = function() {
+const validateR = function () {
     const selectedR = document.querySelector('input[type="radio"]:checked')
     if (!selectedR) {
         showMessage(error, "Необходимо выбрать координату R!")
@@ -65,6 +61,7 @@ function changeR(event) {
     currentR = parseFloat(selectedR.value)
     redraw(currentR)
 }
+
 rInput.forEach(radio => {
     radio.addEventListener('change', changeR)
 })
@@ -84,6 +81,7 @@ function clear() {
     mainForm.reset()
     redraw(currentR)
 }
+
 clearButton.addEventListener('click', clear)
 
 async function handleSubmit(event) {
@@ -102,6 +100,12 @@ mainForm.addEventListener('submit', handleSubmit);
 
 function addRow() {
 
+}
+
+function saveToLocalStorage() {
+    let savedResult = JSON.parse(localStorage.getItem('results') || '[]')
+    savedResult.push(data)
+    localStorage.setItem('results', JSON.stringify(savedResult))
 }
 
 

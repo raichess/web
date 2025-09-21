@@ -1,166 +1,178 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <title>Лаб1</title>
-        <style>
-            body {
-                text-align: center;
-                margin: 0;
-                font-family: fantasy;
-                background-image: url(background.jpg);
-                background-size: 100% auto;
-                background-repeat: no-repeat;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh; 
-            }
+<head>
+    <meta charset="UTF-8">
+    <title>Лаб1</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            font-family: fantasy;
+            background-image: url(background.jpg);
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-            header {
-                color: rgb(234, 10, 129);
-                background-color: rgb(255, 129, 192);
-                padding: 20px 0;
-            }
+        header {
+            color: rgb(234, 10, 129);
+            background-color: rgb(255, 129, 192);
+            padding: 20px 0;
+        }
 
-            #name {
-                -webkit-text-stroke: 0.25px black;
-                font-size: 36px;
-            }
-            #variant {
-                font-size: 24px;
-            }
-            #main {
-                display: flex;                   
-                justify-content: space-between;  
-                align-items: flex-start;         
-                margin: 50px;
-            }
-            #form {
-                text-align: left;
-                margin: 20px;
-                width: 60%;     
-            }
-            #form .label_name {
-                color: rgb(172, 0, 92); 
-                font-weight: bold;
-                font-size: 28px;
-            }
-            #form label {
-                color: rgb(200, 24, 118);
-                font-size: 20px; 
-            }
-            #form select {
-                color: rgb(200, 24, 118);
-                font-size: 24px; 
-            }
+        #name {
+            -webkit-text-stroke: 0.25px black;
+            font-size: 36px;
+        }
 
-            #button_container button {
-                width: 150px;
-                height: 40px;
-                border-radius: 15px;
-                margin-top: 12px;
-                border: 2px solid rgb(172, 0, 92);
-                background-color: rgb(255, 153, 204);
-                font-size: 13px;
-                color:black;
-            }
-            #button_container > button:hover {
-                background-color: #E3EDFA;
-            }
-            #table_container {
-                margin: 20px 25px;
-                margin-top: auto; 
-            }
-            #result_table {
-                width: 100%;
-                font-size: 20px;
-                text-align: center;
-                border: 2px solid rgb(172, 0, 92);
-                border-radius: 9px;
-                border-collapse: collapse;
-                height: 10%;  
-            }
-            #result_table th {
-                background: rgb(255, 153, 204);
-                border: 2px solid rgb(172, 0, 92);
-                width: 16.66%;
-            }
-            #result_table td {
-                background: #FAF0E3;
-                border: 2px solid rgb(172, 0, 92);
-                width: 16.66%;
-            }
-            #canvas_container {
-                width: 30%;                      
-                display: flex;
-                justify-content: right;         
-                align-items: flex-start;        
-            }
-        </style>
-    </head>
+        #variant {
+            font-size: 24px;
+        }
 
-    <body>
-        <header>
-            <h1 id="name">Рогович Мария Михайловна P3213</h1>
-            <h1 id="variant">Вариант 467242</h1>
-        </header>
+        #main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 50px;
+        }
 
-        <div id="main">
-            <form id="form">
-                <div id="choice_x">
-                    <span class="label_name">Выберите X: </span>
-                    <select id="x">
-                        <option value="-2">-2</option>
-                        <option value="-1.5">-1.5</option>
-                        <option value="-1">-1</option>
-                        <option value="-0.5">-0.5</option>
-                        <option value="0">0</option>
-                        <option value="0.5">0.5</option>
-                        <option value="1">1</option>
-                        <option value="1.5">1.5</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-                <div id="choice_y">
-                    <span class="label_name">Введите Y: </span>
-                    <label><input type="text" id="y" placeholder="От -5 до 5"></label>
-                </div>
-                <div id="choice_r">
-                    <span class="label_name">Введите R: </span>
-                    <label><input class="radio_R" type="radio" name="r" value="1">1</label>
-                    <label><input class="radio_R" type="radio" name="r" value="2">2</label>
-                    <label><input class="radio_R" type="radio" name="r" value="3">3</label>
-                    <label><input class="radio_R" type="radio" name="r" value="4">4</label>
-                    <label><input class="radio_R" type="radio" name="r" value="5">5</label>
-                </div>
-                <div id="button_container">
-                    <button id="submit" type="button">Отправить</button>
-                    <button id="clear" type="button">Очистить</button>
-                </div>
-                <div class="error" id="error"></div>
-            </form>
-            <div id="canvas_container">
-                <canvas id="canvas_graph" width="500" height="500"></canvas>
-            </div>  
+        #form {
+            text-align: left;
+            margin: 20px;
+            width: 60%;
+        }
+
+        #form .label_name {
+            color: rgb(172, 0, 92);
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        #form label {
+            color: rgb(200, 24, 118);
+            font-size: 20px;
+        }
+
+        #form select {
+            color: rgb(200, 24, 118);
+            font-size: 24px;
+        }
+
+        #button_container button {
+            width: 150px;
+            height: 40px;
+            border-radius: 15px;
+            margin-top: 12px;
+            border: 2px solid rgb(172, 0, 92);
+            background-color: rgb(255, 153, 204);
+            font-size: 13px;
+            color: black;
+        }
+
+        #button_container > button:hover {
+            background-color: #E3EDFA;
+        }
+
+        #table_container {
+            margin: 20px 25px;
+            margin-top: auto;
+        }
+
+        #result_table {
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+            border: 2px solid rgb(172, 0, 92);
+            border-radius: 9px;
+            border-collapse: collapse;
+            height: 10%;
+        }
+
+        #result_table th {
+            background: rgb(255, 153, 204);
+            border: 2px solid rgb(172, 0, 92);
+            width: 16.66%;
+        }
+
+        #result_table td {
+            background: #FAF0E3;
+            border: 2px solid rgb(172, 0, 92);
+            width: 16.66%;
+        }
+
+        #canvas_container {
+            width: 30%;
+            display: flex;
+            justify-content: right;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h1 id="name">Рогович Мария Михайловна P3213</h1>
+    <h1 id="variant">Вариант 467242</h1>
+</header>
+
+<div id="main">
+    <form id="form">
+        <div id="choice_x">
+            <span class="label_name">Выберите X: </span>
+            <select id="x">
+                <option value="-2">-2</option>
+                <option value="-1.5">-1.5</option>
+                <option value="-1">-1</option>
+                <option value="-0.5">-0.5</option>
+                <option value="0">0</option>
+                <option value="0.5">0.5</option>
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+            </select>
         </div>
-          
-
-        <div id="table_container">
-            <table id="result_table">
-                <thead>
-                <tr>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th>R</th>
-                    <th>Попали?</th>
-                    <th>Дата</th>
-                    <th>Время работы</th>
-                </tr>
-                </thead>
-                <tbody id="body_table"></tbody>
-            </table>
+        <div id="choice_y">
+            <span class="label_name">Введите Y: </span>
+            <label><input type="text" id="y" placeholder="От -5 до 5"></label>
         </div>
-         <script type="module" src="mainscript.js"></script>
-    </body>
+        <div id="choice_r">
+            <span class="label_name">Введите R: </span>
+            <label><input class="radio_R" type="radio" name="r" value="1">1</label>
+            <label><input class="radio_R" type="radio" name="r" value="2">2</label>
+            <label><input class="radio_R" type="radio" name="r" value="3">3</label>
+            <label><input class="radio_R" type="radio" name="r" value="4">4</label>
+            <label><input class="radio_R" type="radio" name="r" value="5">5</label>
+        </div>
+        <div id="button_container">
+            <button id="submit" type="button">Отправить</button>
+            <button id="clear" type="button">Очистить</button>
+        </div>
+        <div class="error" id="error"></div>
+    </form>
+    <div id="canvas_container">
+        <canvas id="canvas_graph" width="500" height="500"></canvas>
+    </div>
+</div>
+
+
+<div id="table_container">
+    <table id="result_table">
+        <thead>
+        <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>R</th>
+            <th>Попали?</th>
+            <th>Дата</th>
+            <th>Время работы</th>
+        </tr>
+        </thead>
+        <tbody id="body_table"></tbody>
+    </table>
+</div>
+<script type="module" src="mainscript.js"></script>
+</body>
 </html>
