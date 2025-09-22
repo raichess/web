@@ -13,7 +13,29 @@ window.onload = function () {
 };
 
 async function sendRequest(x, y, r) {
-
+    const params = new URLSearchParams({x,y,r});
+    const url = `http://localhost:8080/fcgi-bin/server.jar?${params.toString()}`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+        });
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        const result = await response.json();
+        if (result.error) {
+            showMessage(error, result.error);
+            return;
+        }
+        let history = JSON.parse(localStorage.getItem('results') || '[]');
+        history.push(result);
+        localStorage.setItem('results', JSON.stringify(history));
+        addRow(result);
+        drawPoint(parseFloat(result.x), parseFloat(result.y), result.hit);
+    } catch (err) {
+        console.error(err);
+        showMessage(error, "Error about server");
+    }
 }
 
 
@@ -93,19 +115,44 @@ async function handleSubmit(event) {
     if (!validateX() || !validateY() || !validateR()) return;
 
     const r = rSelected.value;
-    //await sendRequest(x, y, r);
+    await sendRequest(x, y, r);
 }
 
 mainForm.addEventListener('submit', handleSubmit);
 
-function addRow() {
-
+function addRow(data) {
+    const { x, y, r, hit, serverTime, scriptTime } = data;
+    const tbody = document.getElementById('body_table');
+    let row = tbody.insertRow(-1);
+    row.insertCell(0).textContent = x;
+    row.insertCell(1).textContent = y;
+    row.insertCell(2).textContent = r;
+    row.insertCell(3).textContent = hit ? 'Да' : 'Нет';
+    row.insertCell(4).textContent = time;
+    row.insertCell(5).textContent = scriptTime;
 }
+
 
 function saveToLocalStorage() {
     let savedResult = JSON.parse(localStorage.getItem('results') || '[]')
     savedResult.push(data)
     localStorage.setItem('results', JSON.stringify(savedResult))
+}
+function showMessage(element, message) {
+    element.onanimationend = null
+    if (message) {
+        element.hidden = false
+        element.style.animation = 'fadeInAndFadeOut 3s'
+        element.textContent = message
+        element.onanimationend = () => {
+            element.hidden = true
+            element.textContent = ""
+        }
+    } else {
+        element.hidden = true
+        element.style.animation = 'none'
+        element.textContent = ""
+    }
 }
 
 
