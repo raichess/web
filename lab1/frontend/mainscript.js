@@ -13,10 +13,8 @@ window.onload = function () {
 };
 
 async function sendRequest(x, y, r) {
-    const params = new URLSearchParams({x,y,r});
-    const url = `http://localhost:8080/fcgi-bin/server.jar?${params.toString()}`;
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`http://localhost:8080/fcgi-bin/server.jar?x=${x}&y=${y}&r=${r}`, {
             method: 'GET',
         });
         if (!response.ok) {
@@ -51,21 +49,33 @@ const validateX = function () {
 }
 
 const validateY = function () {
-    const selectedY = yInput.value.trim();
+    let selectedY = yInput.value.trim();
     if (selectedY === '') {
-        showMessage(error, "Необходимо выбрать координату Y!")
-        return false
-    } else if (isNaN(selectedY)) {
-        showMessage(error, "Y должен быть числом!")
-        return false
-    } else if (selectedY < -5 || selectedY > 5) {
-        showMessage(error, "Не входит в диапазон!")
-        return false
-    } else {
-        showMessage(error, "")
-        return true
+        showMessage(error, "Необходимо выбрать координату Y!");
+        return false;
     }
-}
+    selectedY = selectedY.replace(/,/g, '.');
+    const yNum = parseFloat(selectedY);
+
+    if (isNaN(yNum)) {
+        showMessage(error, "Y должен быть числом!");
+        return false;
+    }
+    if (yNum < -5 || yNum > 5) {
+        showMessage(error, "Не входит в диапазон от -5 до 5!");
+        return false;
+    }
+    if (selectedY.includes('.')) {
+        const decimalPart = selectedY.split('.')[1];
+
+        if (decimalPart && decimalPart.length > 6) {
+            showMessage(error, "Слишком много знаков после запятой! Макс. 6");
+            return false;
+        }
+    }
+    showMessage(error, "");
+    return true;
+};
 
 const validateR = function () {
     const selectedR = document.querySelector('input[type="radio"]:checked')
@@ -121,7 +131,7 @@ async function handleSubmit(event) {
 mainForm.addEventListener('submit', handleSubmit);
 
 function addRow(data) {
-    const { x, y, r, hit, serverTime, scriptTime } = data;
+    const { x, y, r, hit, time, scriptTime } = data;
     const tbody = document.getElementById('body_table');
     let row = tbody.insertRow(-1);
     row.insertCell(0).textContent = x;
@@ -132,12 +142,6 @@ function addRow(data) {
     row.insertCell(5).textContent = scriptTime;
 }
 
-
-function saveToLocalStorage() {
-    let savedResult = JSON.parse(localStorage.getItem('results') || '[]')
-    savedResult.push(data)
-    localStorage.setItem('results', JSON.stringify(savedResult))
-}
 function showMessage(element, message) {
     element.onanimationend = null
     if (message) {
@@ -154,9 +158,6 @@ function showMessage(element, message) {
         element.textContent = ""
     }
 }
-
-
-
 
 
 
