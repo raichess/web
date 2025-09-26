@@ -34,38 +34,46 @@ public class Main {
                 }
                 try {
                     if (!params.containsKey("x") || !params.containsKey("y") || !params.containsKey("r")) {
-                        throw new RuntimeException("Invalid GET-request: missing parameters");
-                    } else {
-                        float x, y;
-                        int r;
-                        try {
-                            x = Float.parseFloat(params.get("x"));
-                            y = Float.parseFloat(params.get("y"));
-                            r = Integer.parseInt(params.get("r"));
-                        } catch (NumberFormatException e) {
-                            System.out.println(error("Parameters must be numbers! "));
-                            continue;
+                        System.out.println(error("Missing parameters x, y or r"));
+                        continue;
+                    }
+                    String xStr = params.get("x");
+                    String yStr = params.get("y");
+                    String rStr = params.get("r");
+                    float x, y;
+                    int r;
+                    try {
+                        x = Float.parseFloat(params.get("x"));
+                        y = Float.parseFloat(params.get("y"));
+                        r = Integer.parseInt(params.get("r"));
+                    } catch (NumberFormatException e) {
+                        System.out.println(error("Parameters must be numbers! "));
+                        continue;
                         }
                         if (!validation.validateXYR(x, y, r)) {
                             System.out.println(error("Invalid parameters !"));
                         } else {
                             boolean hit = hitCheck.checkHit(x, y, r);
-                            long elapsed = System.nanoTime() - startTime;
-                            System.out.println(createJSON(x, y, r, hit, elapsed));
+                            System.out.println(response(xStr, yStr, rStr,hit, startTime));
                         }
 
-
-                    }
                 } catch (Exception e) {
                     System.out.println(error("Unknown exception: " + e.getMessage()));
                 }
-
+            } else {
+                System.out.println(error("Method not allowed. Only GET supported."));
             }
         }
     }
 
-    private static String error(String message) {
-        return String.format("{\"error\":\"%s\"}", message);
+    private static String error(String msg) {
+        String content = "{\"error\":\"" + msg + "\"}";
+        return """
+               Content-Type: application/json; charset=utf-8
+               Status: 400 Bad Request
+               
+               %s
+               """.formatted(content);
     }
 
     private static LinkedHashMap<String, String> parse(String query) {
@@ -77,14 +85,21 @@ public class Main {
         return result;
     }
 
-    private static String createJSON(float x, float y, int r, boolean hit, long scriptTime) {
-        return """
-                {"x": %.2f, "y": %.2f, "r": %d, "hit": %b, "time": "%s", "scriptTime": %.3f}
-                """.formatted(
+    private static String response(String x, String y, String r, boolean hit, long startTime) {
+        String content = String.format(
+                "{\"x\":\"%s\",\"y\":\"%s\",\"r\":\"%s\",\"hit\":%s,\"time\":\"%s\",\"scriptTime\":%s}",
                 x, y, r, hit,
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                scriptTime / 1_000_000.0
+                (double)(System.nanoTime() - startTime) / 10000000
         );
+
+        return """
+               Content-Type: application/json; charset=utf-8
+               Status: 200 OK
+               
+               %s
+               """.formatted(content);
     }
+
 
 }
