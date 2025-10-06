@@ -14,7 +14,7 @@ window.onload = function () {
 
 async function sendRequest(x, y, r) {
     try {
-        const response = await fetch(`http://localhost:8080/fcgi-bin/server.jar?x=${x}&y=${y}&r=${r}`, {
+        const response = await fetch(`/fcgi-bin/server.jar?x=${x}&y=${y}&r=${r}`, {
             method: 'GET',
         });
         if (!response.ok) {
@@ -32,7 +32,7 @@ async function sendRequest(x, y, r) {
         drawPoint(parseFloat(result.x), parseFloat(result.y), result.hit);
     } catch (err) {
         console.error(err);
-        showMessage(error, "Error about server");
+        showMessage(error, "Server error!");
     }
 }
 
@@ -50,11 +50,12 @@ const validateX = function () {
 
 const validateY = function () {
     let selectedY = yInput.value.trim();
+    selectedY = normalizeNumber(selectedY);
     if (selectedY === '') {
         showMessage(error, "Необходимо выбрать координату Y!");
         return false;
     }
-    selectedY = selectedY.replace(/,/g, '.');
+    yInput.value = selectedY;
     const yNum = parseFloat(selectedY);
 
     if (isNaN(yNum)) {
@@ -119,7 +120,7 @@ clearButton.addEventListener('click', clear)
 async function handleSubmit(event) {
     event.preventDefault();
     const x = xInput.value;
-    const y = yInput.value.trim();
+    const y = normalizeNumber(yInput.value);
     const rSelected = document.querySelector('#choice_r input[type="radio"]:checked');
 
     if (!validateX() || !validateY() || !validateR()) return;
@@ -157,6 +158,24 @@ function showMessage(element, message) {
         element.style.animation = 'none'
         element.textContent = ""
     }
+}
+function normalizeNumber(value) {
+    if (!value) return '';
+    let normalized = value.trim();
+    normalized = normalized.replace(/[^0-9.,-]/g, '');
+    normalized = normalized.replace(/,/g, '.');
+    const dotIndex = normalized.indexOf('.');
+    if (dotIndex !== -1) {
+        normalized = normalized.substring(0, dotIndex + 1) +
+            normalized.substring(dotIndex + 1).replace(/\./g, '');
+    }
+    const minusCount = (normalized.match(/-/g) || []).length;
+    if (minusCount > 1) {
+        normalized = '-' + normalized.replace(/-/g, '');
+    } else if (minusCount === 1 && normalized.indexOf('-') !== 0) {
+        normalized = '-' + normalized.replace(/-/g, '');
+    }
+    return normalized;
 }
 
 
