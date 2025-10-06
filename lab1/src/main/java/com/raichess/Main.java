@@ -2,6 +2,7 @@ package com.raichess;
 
 import com.fastcgi.FCGIInterface;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
@@ -44,7 +45,7 @@ public class Main {
                     int r;
                     try {
                         x = Float.parseFloat(params.get("x"));
-                        y = Float.parseFloat(params.get("y"));
+                        y = Float.parseFloat(params.get("y").replace(',', '.'));
                         r = Integer.parseInt(params.get("r"));
                     } catch (NumberFormatException e) {
                         System.out.println(error("Parameters must be numbers! "));
@@ -54,7 +55,7 @@ public class Main {
                             System.out.println(error("Invalid parameters !"));
                         } else {
                             boolean hit = hitCheck.checkHit(x, y, r);
-                            System.out.println(response(xStr, yStr, rStr,hit, startTime));
+                            System.out.println(response(xStr, yStr, rStr, hit, startTime));
                         }
 
                 } catch (Exception e) {
@@ -69,11 +70,12 @@ public class Main {
     private static String error(String msg) {
         String content = "{\"error\":\"" + msg + "\"}";
         return """
-               Content-Type: application/json; charset=utf-8
-               Status: 400 Bad Request
+               HTTP/1.1 400 Bad Request
+               Content-Type: application/json; charset=utf-8e
+               Content-Length: %d
                
-               %s
-               """.formatted(content);
+               %s\n
+               """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
     }
 
     private static LinkedHashMap<String, String> parse(String query) {
@@ -94,11 +96,12 @@ public class Main {
         );
 
         return """
+               HTTP/1.1 200 OK
                Content-Type: application/json; charset=utf-8
-               Status: 200 OK
+               Content-Length: %d
                
                %s
-               """.formatted(content);
+               """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
     }
 
 
