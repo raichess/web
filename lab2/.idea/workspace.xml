@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="734964da-c754-48c8-9a3b-f462980b117b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/raichess/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/raichess/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/frontend/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/frontend/canvas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/src/main/java/com/raichess/HitCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/src/main/java/com/raichess/HitCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/src/main/java/com/raichess/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/src/main/java/com/raichess/Validation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/classes/com/raichess/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/target/classes/com/raichess/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/lab1-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/target/lab1-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/surefire-reports/TEST-com.raichess.AppTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/surefire-reports/com.raichess.AppTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/target/test-classes/com/raichess/AppTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;raichess&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/raichess/web.git&quot;,
+    &quot;accountId&quot;: &quot;490804e5-6f3a-4cef-bae9-3167466b9d5f&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="33hRYHfdsMVask0OLVXfik6FKtz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/mariarogovich/itmo/web/lab2/src/main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/webapp" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="734964da-c754-48c8-9a3b-f462980b117b" name="Changes" comment="" />
+      <created>1759767364295</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759767364295</updated>
+      <workItem from="1759767365528" duration="3398000" />
+      <workItem from="1760100674794" duration="3735000" />
+      <workItem from="1760106473505" duration="3112000" />
+      <workItem from="1760284072411" duration="1858000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
