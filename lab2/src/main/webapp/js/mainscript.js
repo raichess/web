@@ -8,7 +8,8 @@ const hiddenX = document.getElementById("canvas_x");
 const hiddenY = document.getElementById("canvas_y");
 const hiddenR = document.getElementById("canvas_r");
 let yInput = document.getElementById("y");
-let currentR = 2
+let currentR = null
+const rInputs = document.querySelectorAll('#choice_r input[type="checkbox"]');
 
 window.onload = () => {
     redraw(currentR);
@@ -83,11 +84,10 @@ function redraw(R = currentR) {
 }
 
 
-const rInput = document.querySelectorAll('#choice_r input[type="checkbox"]');
-rInput.forEach(cb => {
+rInputs.forEach(cb => {
     cb.addEventListener('click', (event) => {
         if (!event.target.checked) return;
-        rInput.forEach(other => {
+        rInputs.forEach(other => {
             if (other !== event.target) other.checked = false;
         });
         currentR = parseFloat(event.target.value);
@@ -106,7 +106,7 @@ function validateR() {
 
 canvas.addEventListener("click", (event) => {
     if (!validateR()) {
-        showMessage("Радиус не выбран! ")
+        showMessage(error, "Радиус не выбран! ");
         return;
     }
     const rect = canvas.getBoundingClientRect();
@@ -124,11 +124,11 @@ canvas.addEventListener("click", (event) => {
     hiddenForm.submit();//отправка по клику
 })
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!validateX() || !validateY() || !validateR()) return;
-
-    form.submit();
+document.getElementById("submit-btn").addEventListener("click", (event) => {
+    if (!validateX() || !validateY() || !validateR()) {
+        event.preventDefault();
+        return;
+    }
 });
 document.getElementById("clear").addEventListener("click", () => {
     document.querySelectorAll('#choice_x input[type="radio"]').forEach(x => x.checked = false);

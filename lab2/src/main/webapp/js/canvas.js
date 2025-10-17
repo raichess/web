@@ -1,7 +1,7 @@
 const scale = 50
 let centerX, centerY
 
-function initialization(R = 2) {
+function initialization(R) {
     const canvas = document.getElementById("canvas_graph")
     const ctx = canvas.getContext("2d")
     const W = canvas.width;

@@ -143,7 +143,7 @@
         </div>
         <div id="choice_y">
             <span class="label_name">Введите Y: </span>
-            <label><input type="text" id="y" placeholder="От -5 до 5"></label>
+            <label><input type="text" id="y" name="y" placeholder="От -5 до 5"></label>
         </div>
         <div id="choice_r">
             <span class="label_name">Введите R: </span>
@@ -154,7 +154,7 @@
             <label><input type="checkbox" name="r" class="checkbox_r" value="3">3</label>
         </div>
         <div id="button_container">
-            <button id="submit" type="submit">Отправить</button>
+            <button id="submit-btn" type="submit">Отправить</button>
             <button id="clear" type="button">Очистить</button>
         </div>
         <div class="error" id="error"></div>
@@ -205,6 +205,6 @@
         </tbody>
     </table>
 </div>
-<script type="module" src="mainscript.js"></script>
+<script type="module" src="js/mainscript.js"></script>
 </body>
 </html>

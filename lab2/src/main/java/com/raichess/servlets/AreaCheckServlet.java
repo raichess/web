@@ -3,12 +3,12 @@ package com.raichess.servlets;
 import com.raichess.manager.HitCheck;
 import com.raichess.model.Dot;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +32,7 @@ public class AreaCheckServlet extends HttpServlet {
             long endTime = System.nanoTime();
             String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
             String executionTime = Double.toString((double) (endTime - startTime) / 1000000000);
-            Dot dot = new Dot(x, y, r, hit, currentTime, executionTime);
+            Dot dot = new Dot(x, y, r, hit, executionTime, currentTime);
             ServletContext context = getServletContext();
             List<Dot> results = (List<Dot>) context.getAttribute("results");
             if (results == null) {
