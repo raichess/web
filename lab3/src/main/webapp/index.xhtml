@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <title>lab3</title>
+    <h:outputStylesheet name="index.css" library="css"/>
+    <meta charset="UTF-8"/>
+</h:head>
+
+<h:body style="
+    background-image: url('#{resource['img:background.jpg']}');
+    background-size: cover;
+    background-repeat: no-repeat;
+">
+    <header>
+        <h1 id="name">Рогович Мария Михайловна P3213</h1>
+        <h2 id="variant">Вариант 1726</h2>
+    </header>
+
+    <div id="clock-display" class="clock-style">
+    </div>
+
+    <div id="main-link">
+        <h:link value="Главная страница" outcome="main.xhtml"/>
+    </div>
+
+
+    <script type="text/javascript">
+        function updateClock() {
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            const timeString = now.toLocaleDateString('ru-RU', options);
+            const clockElement = document.getElementById('clock-display');
+            if (clockElement) {
+                clockElement.innerText = timeString;
+            }
+        }
+
+        updateClock();
+
+        setInterval(updateClock, 7000);
+    </script>
+</h:body>
+</html>
