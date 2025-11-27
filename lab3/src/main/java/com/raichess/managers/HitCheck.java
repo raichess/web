@@ -1,4 +1,4 @@
-package com.raichess;
+package com.raichess.managers;
 
 public class HitCheck {
 

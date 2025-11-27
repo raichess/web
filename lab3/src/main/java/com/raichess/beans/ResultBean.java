@@ -27,5 +27,18 @@ public class ResultBean implements Serializable {
     public void clearResult() {
         db.clearAllPoints();
     }
+    public String getJsonPoints() {
+        List<Point> points = db.getAllPoints();
+        StringBuilder sb = new StringBuilder("[");
+        boolean first = true;
+        for (Point p : points) {
+            if (!first) sb.append(",");
+            sb.append(String.format("{\"x\":%f,\"y\":%f,\"r\":%f,\"hit\":%b}",
+                    p.getX(), p.getY(), p.getR(), p.isHit()));
+            first = false;
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 
 }
