@@ -3,6 +3,7 @@ package com.raichess.models;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "CHECK_POINTS")
 public class Point {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

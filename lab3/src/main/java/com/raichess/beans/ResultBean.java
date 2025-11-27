@@ -1,8 +1,10 @@
-package beans;
+package com.raichess.beans;
 
+import com.raichess.managers.DataBaseManager;
 import com.raichess.models.Point;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -12,20 +14,18 @@ import java.util.List;
 @Named("results")
 @ApplicationScoped
 public class ResultBean implements Serializable {
-    private List<Point> results;
 
-    @PostConstruct
-    public void init() {
-        results = new ArrayList<>();
-    }
+    @Inject
+    private DataBaseManager db;
+
     public List<Point> getResults() {
-        return results;
+        return db.getAllPoints();
     }
     public synchronized void addResult(Point newPoint) {
-        results.add(0, newPoint);
+        db.savePoint(newPoint);
     }
     public void clearResult() {
-        results.clear();
+        db.clearAllPoints();
     }
 
 }

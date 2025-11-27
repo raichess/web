@@ -1,8 +1,8 @@
-package beans;
+package com.raichess.beans;
 
-import com.raichess.HitCheck;
+import com.raichess.managers.DataBaseManager;
+import com.raichess.managers.HitCheck;
 import com.raichess.models.Point;
-import jakarta.annotation.ManagedBean;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class PointBean  implements Serializable {
 
     @Inject
-    private ResultBean resultBean;
+    private DataBaseManager db;
 
     private double x;
     private double y;
@@ -31,7 +31,7 @@ public class PointBean  implements Serializable {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         String executionTime = Double.toString((double) (endTime - startTime) / 1000000000);
         Point newPoint = new Point(x, y, r, isHit, executionTime, currentTime);
-        resultBean.addResult(newPoint);
+        db.savePoint(newPoint);
     }
     public double getX() {
         return x;
