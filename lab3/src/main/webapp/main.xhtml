@@ -7,12 +7,8 @@
 <h:head>
     <title>lab3</title>
     <meta charset="UTF-8"/>
-    <h:outputScript name="canvas.js" library="js"/>
-    <h:outputScript library="js" name="mainscript.js" type="module"/>
-    <h:outputScript>
-        var jsonString = '#{results.jsonPoints}';
-        window.savedPoints = JSON.parse(jsonString);
-    </h:outputScript>
+    <h:outputScript library="js" name="canvas.js"/>
+    <h:outputScript library="js" name="mainscript.js"/>
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
 
@@ -21,100 +17,123 @@
     background-size: cover;
     background-repeat: no-repeat;
 ">
+
     <div id="check_container">
+
         <h:form id="check_form">
             <h:inputText id="x_input_hidden" value="#{pointBean.x}" style="display:none;"/>
             <h:inputText id="y_input_hidden" value="#{pointBean.y}" style="display:none;"/>
 
-            <h:panelGrid columns="2" styleClass="form_grid">
-
-                <h:outputLabel for="x_input" value="От -5 до 5"/>
-                <h:inputText id="x_input" value="#{pointBean.x}">
+            <div id="block_x">
+                <h:outputLabel for="x_input" value="Введите X (От -5 до 5):" styleClass="label_name"/>
+                <br/>
+                <h:inputText id="x_input" value="#{pointBean.x}" required="true" converterMessage="Ошибка: X должен быть числом!" validatorMessage="X должен быть в диапазоне от -5 до 5."> >
                     <f:validateRequired message="X должен быть задан"/>
-                    <f:validateDoubleRange minimum="-5.0" maximum="5.0"
-                                           message="X должен быть числом в диапазоне [-5; 5]"/>
+                    <f:validateDoubleRange minimum="-5.0" maximum="5.0" message="X должен быть от -5 до 5"/>
                 </h:inputText>
+                <h:message for="x_input" styleClass="error_message" id="x_input_msg"/>
+            </div>
 
-                <h:outputLabel value="R:" for="r_select"/>
-                <h:selectOneMenu id="r_select" value="#{pointBean.r}"
-                                 onchange="updateR(this.value);">
-                    <f:selectItem itemValue="0" itemLabel="Выберите R "/>
-                    <f:selectItems value="#{pointBean. possibleRValues}"/>
+            <div id="block_r">
+                <h:outputLabel value="Введите R:" for="r_select" styleClass="label_name"/>
+                <br/>
+                <h:selectOneMenu id="r_select" value="#{pointBean.r}" onchange="updateR(this.value);">
+                    <f:selectItem itemValue="0" itemLabel="Выберите R"/>
+                    <f:selectItems value="#{pointBean.possibleRValues}"/>
                     <f:validateDoubleRange minimum="0.1" message="R должен быть выбран."/>
-
-                    <f:ajax execute="@this" render="@none"/>
+                    <f:ajax execute="@this" render="drawPointsScript" />
                 </h:selectOneMenu>
-            </h:panelGrid>
+                <h:message for="r_select" styleClass="error_message" id="r_select_msg"/>
+            </div>
 
-            <div class="y_links">
-                <h:outputLabel value="Y:" style="display: block;"/>
-                <h:panelGroup layout="block" styleClass="y_links">
+            <div id="block_y">
+                <h:outputLabel value="Введите Y:" styleClass="label_name"/>
+                <div class="y_links">
                     <h:commandLink value="-2.0" action="#{pointBean.setYAndCheck(-2.0)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript" />
                     </h:commandLink>
                     <h:commandLink value="-1.5" action="#{pointBean.setYAndCheck(-1.5)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript"/>
                     </h:commandLink>
                     <h:commandLink value="-1.0" action="#{pointBean.setYAndCheck(-1.0)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript"/>
                     </h:commandLink>
                     <h:commandLink value="-0.5" action="#{pointBean.setYAndCheck(-0.5)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript"/>
                     </h:commandLink>
                     <h:commandLink value="0.0" action="#{pointBean.setYAndCheck(0.0)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript"/>
                     </h:commandLink>
                     <h:commandLink value="0.5" action="#{pointBean.setYAndCheck(0.5)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript"/>
                     </h:commandLink>
                     <h:commandLink value="1.0" action="#{pointBean.setYAndCheck(1.0)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript"/>
                     </h:commandLink>
                     <h:commandLink value="1.5" action="#{pointBean.setYAndCheck(1.5)}" styleClass="y_link">
-                        <f:ajax execute="x_input r_select" render="result_table graph_area"/>
+                        <f:ajax execute="x_input r_select" render="result_table graph_area x_input_msg r_select_msg drawPointsScript"/>
                     </h:commandLink>
-                </h:panelGroup>
+                </div>
             </div>
-            <h:message for="x_input" style="color: red; display: block;"/>
-            <h:message for="r_select" style="color: red; display: block;"/>
 
-            <h:commandButton id="submit_button_canvas" action="#{pointBean.checkPoint()}" style="display:none;">
-                <f:ajax execute="x_input_hidden y_input_hidden r_select" render="result_table graph_area"/>
-            </h:commandButton>
+            <div id="buttons">
+                <h:commandButton id="submit_button_canvas" action="#{pointBean.checkPoint()}" style="display:none;">
+                    <f:ajax execute="x_input_hidden y_input_hidden r_select" render="result_table graph_area drawPointsScript"/>
+                </h:commandButton>
 
-            <h:commandButton value="Очистить" action="#{results.clearResult()}" immediate="true"
-                             styleClass="button_clear">
-                <f:ajax render="result_table graph_area"/>
-            </h:commandButton>
+                <h:commandButton value="Очистить" action="#{results.clearResult()}" immediate="true"
+                                 styleClass="button_clear">
+                    <f:ajax render="result_table graph_area drawPointsScript"/>
+                </h:commandButton>
+            </div>
 
         </h:form>
-    </div>
-    <h:panelGroup id="graph_area">
-        <h:panelGroup id="canvas">
-            <canvas id="canvas_graph" width="500" height="500"
-                    onclick="handleCanvasClick(event)">
-            </canvas>
+
+        <h:panelGroup id="graph_area" layout="block">
+            <canvas id="canvas_graph" width="500" height="500" onclick="handleCanvasClick(event)"></canvas>
         </h:panelGroup>
-    </h:panelGroup>
 
-    <div id="table_container">
-        <h:dataTable id="result_table"
-                     value="#{results.results}"
-                     var="p"
-                     styleClass="results_table">
+        <div id="link">
+            <h:link value="Стартовая страница" outcome="index.xhtml"/>
+        </div>
 
-            <h:column headerText="X"><h:outputText value="#{p.x}"/></h:column>
-            <h:column headerText="Y"><h:outputText value="#{p.y}"/></h:column>
-            <h:column headerText="R"><h:outputText value="#{p.r}"/></h:column>
-            <h:column headerText="Попадание"><h:outputText value="#{p.hit ? 'ДА' : 'НЕТ :('}"/></h:column>
+        <div id="table_container">
+            <h:dataTable id="result_table" value="#{results.results}" var="p" styleClass="results_table">
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    <h:outputText value="#{p.x}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    <h:outputText value="#{p.y}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    <h:outputText value="#{p.r}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Попадание</f:facet>
+                    <h:outputText value="#{p.hit ? 'ДА' : 'НЕТ'}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Время выполнения (с)</f:facet>
+                    <h:outputText value="#{p.executionTime}">
+                        <f:convertNumber pattern="0.000000000"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Время</f:facet>
+                    <h:outputText value="#{p.currentTime}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
 
-            <h:column headerText="Время выполнения (с)">
-                <h:outputText value="#{p.executionTime}">
-                    <f:convertNumber pattern="0.000000000"/>
-                </h:outputText>
-            </h:column>
-            <h:column headerText="Время"><h:outputText value="#{p.currentTime}"/></h:column>
-        </h:dataTable>
     </div>
+    <h:panelGroup id="drawPointsScript">
+        <h:outputScript>
+            window.savedPoints = JSON.parse('#{results.jsonPoints}');
+            redrawGraph();
+        </h:outputScript>
+    </h:panelGroup>
 </h:body>
 </html>

@@ -1,5 +1,3 @@
-import {initialization, drawPoint} from './canvas.js';
-
 function redrawGraph() {
     const rSelect = document.getElementById('check_form:r_select');
     let currentR = 1;
@@ -10,17 +8,19 @@ function redrawGraph() {
 
     initialization(currentR);
 
-    if (window.savedPoints && Array.isArray(window.savedPoints)) {
-        window.savedPoints.forEach(point => {
-            drawPoint(point.x, point.y, point.hit);
-        });
-    }
+    window.savedPoints.forEach(point => {
+        let x = parseFloat(point.x);
+        let y = parseFloat(point.y);
+        drawPoint(x, y, point.hit);
+    });
 }
+
+window.redrawGraph = redrawGraph;
 document.addEventListener('DOMContentLoaded', redrawGraph);
-window.updateR = function(newRValue) {
+window.updateR = function (newRValue) {
     redrawGraph();
 }
-window.handleCanvasClick = function(event) {
+window.handleCanvasClick = function (event) {
     const rSelect = document.getElementById('check_form:r_select');
     if (!rSelect || rSelect.value === '0') {
         alert("Пожалуйста, выберите значение R перед кликом по графику");
