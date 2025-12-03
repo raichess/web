@@ -1,0 +1,142 @@
+body {
+    text-align: center;
+    margin: 0;
+    font-family: fantasy, sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-attachment: fixed;
+}
+
+#check_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 50px;
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+}
+
+#check_form {
+    text-align: left;
+    margin: 20px;
+    width: 50%;
+}
+
+#check_form label {
+    color: rgb(172, 0, 92);
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+#check_form input[type="text"],
+#check_form select {
+    padding: 5px;
+    border: 1px solid rgb(255, 153, 204);
+    border-radius: 5px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.y_links {
+    margin-top: 10px;
+}
+
+.y_link {
+    display: inline-block;
+    color: rgb(200, 24, 118);
+    font-size: 20px;
+    margin-right: 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.y_link:hover {
+    color: rgb(234, 10, 129);
+}
+
+.button_clear {
+    width: 150px;
+    height: 40px;
+    border-radius: 15px;
+    margin-top: 25px;
+    border: 2px solid rgb(172, 0, 92);
+    background-color: rgb(255, 153, 204);
+    font-size: 13px;
+    color: rgb(234, 10, 129);
+    cursor: pointer;
+}
+
+.button_clear:hover {
+    background-color: #E3EDFA;
+}
+
+#graph_area {
+    width: 40%;
+    display: flex;
+    justify-content: right;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+#canvas_graph {
+    background-color: white;
+}
+
+#link {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+#link a {
+    text-decoration: none;
+    color: rgb(234, 10, 129);
+    border: 2px solid rgb(172, 0, 92);
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: rgb(255, 153, 204);
+}
+#link a:hover {
+    background-color: #E3EDFA;
+}
+
+#table_container {
+    width: 100%;
+    margin: 20px 25px;
+    margin-top: 50px;
+}
+
+.results_table {
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    border: 2px solid rgb(172, 0, 92);
+    border-radius: 9px;
+    border-collapse: collapse;
+}
+
+.results_table th {
+    background: rgb(255, 153, 204);
+    border: 2px solid rgb(172, 0, 92);
+    padding: 10px;
+}
+
+.results_table td {
+    background: #FAF0E3;
+    border: 2px solid rgb(172, 0, 92);
+    padding: 8px;
+}
+
+.error_message {
+    color: rgb(172, 0, 92);
+    background: white;
+    border: 1px solid rgb(255, 153, 204);
+    display: inline-block;
+    padding: 5px;
+    margin-top: 5px;
+}
